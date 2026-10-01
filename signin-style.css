@@ -1,0 +1,376 @@
+/* --- Global Reset & Typography --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body.signin-body {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  background-color: #061110;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(0, 176, 80, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(255, 193, 7, 0.1) 0%, transparent 40%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  color: #e2e8f0;
+}
+
+/* --- Main Card Container --- */
+.auth-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: #111e1c;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 2.2rem 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+/* --- Back Home Button --- */
+.back-home-btn {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  color: #8fa8a2;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.back-home-btn:hover {
+  color: #ffffff;
+}
+
+/* --- Header Section --- */
+.auth-header {
+  text-align: center;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.brand-badge {
+  width: 52px;
+  height: 52px;
+  background: rgba(255, 193, 7, 0.12);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.8rem auto;
+  padding: 6px;
+}
+
+.brand-icon {
+  width: 100%;
+  height: 100%;
+}
+
+.auth-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
+.auth-subtitle {
+  font-size: 0.85rem;
+  color: #8fa8a2;
+}
+
+/* --- Role Tabs --- */
+.role-tabs {
+  display: flex;
+  background: #091614;
+  padding: 4px;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tab-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.6rem;
+  border: none;
+  background: transparent;
+  color: #8fa8a2;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.tab-btn.active {
+  background: #008751;
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 135, 81, 0.4);
+}
+
+/* --- Form Controls & Toggles --- */
+.input-toggle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #8fa8a2;
+  margin-bottom: 0.8rem;
+}
+
+.toggle-links {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.link-toggle {
+  background: none;
+  border: none;
+  color: #8fa8a2;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.link-toggle.active {
+  color: #ffc107;
+  text-decoration: underline;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+
+.form-group.hidden {
+  display: none;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  margin-bottom: 0.4rem;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forgot-link {
+  font-size: 0.78rem;
+  color: #ffc107;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* --- Inputs Wrappers --- */
+.phone-input-wrap, .input-icon-wrap {
+  display: flex;
+  align-items: center;
+  background: #091614;
+  border: 1.5px solid #1f3330;
+  border-radius: 10px;
+  padding: 0.65rem 0.8rem;
+  transition: border-color 0.2s ease;
+}
+
+.phone-input-wrap:focus-within, .input-icon-wrap:focus-within {
+  border-color: #008751;
+}
+
+.country-prefix {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+  padding-right: 0.6rem;
+  border-right: 1px solid #1f3330;
+  margin-right: 0.6rem;
+  white-space: nowrap;
+}
+
+.field-icon {
+  width: 18px;
+  height: 18px;
+  color: #64748b;
+  margin-right: 0.6rem;
+  flex-shrink: 0;
+}
+
+input[type="tel"], input[type="email"], input[type="password"] {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+input::placeholder {
+  color: #475569;
+}
+
+.toggle-password {
+  background: none;
+  border: none;
+  color: #8fa8a2;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding-left: 0.5rem;
+}
+
+/* --- Checkbox Options --- */
+.form-options {
+  margin-bottom: 1.2rem;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+.remember-me input {
+  accent-color: #008751;
+  width: 15px;
+  height: 15px;
+}
+
+/* --- Buttons --- */
+.btn-submit {
+  width: 100%;
+  padding: 0.85rem;
+  background: #008751;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 135, 81, 0.3);
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.btn-submit:hover {
+  background: #007043;
+  transform: translateY(-1px);
+}
+
+/* --- Social Login Divider --- */
+.divider {
+  position: relative;
+  text-align: center;
+  margin: 1.4rem 0;
+}
+
+.divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.divider span {
+  position: relative;
+  background: #111e1c;
+  padding: 0 10px;
+  font-size: 0.75rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.social-login-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.6rem;
+  background: #091614;
+  border: 1px solid #1f3330;
+  border-radius: 10px;
+  color: #e2e8f0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-social:hover {
+  background: #152523;
+}
+
+.social-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* --- Footer Link --- */
+.auth-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #8fa8a2;
+}
+
+.auth-footer a {
+  color: #ffc107;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Error message state styling */
+.auth-form .error-msg {
+  color: #EA4335;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.auth-form input:invalid-field, 
+.auth-form input[style*="border-color: rgb(234, 67, 53)"] {
+  border-color: #EA4335 !important;
+}

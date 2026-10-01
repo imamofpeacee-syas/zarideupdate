@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service - Zaride</title>
+  
+  <!-- Google Fonts & Lucide Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <link rel="stylesheet" href="terms-style.css">
+</head>
+<body class="dark-mode">
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a href="index.html" class="brand-logo">Zaride<span>.</span></a>
+    
+    <div class="nav-controls">
+      <a href="index.html" class="nav-link">
+        <i data-lucide="home"></i> Home
+      </a>
+      <button class="icon-btn" id="themeToggle" title="Toggle Theme">
+        <i data-lucide="sun" id="themeIcon"></i>
+      </button>
+      <button class="icon-btn" onclick="window.print()" title="Print Policy">
+        <i data-lucide="printer"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <div class="container">
+    
+    <!-- SIDEBAR: SEARCH & TABLE OF CONTENTS -->
+    <aside class="sidebar">
+      <div class="search-box">
+        <i data-lucide="search"></i>
+        <input type="text" id="searchInput" placeholder="Search terms (e.g. refund, safety)..." />
+      </div>
+
+      <nav class="toc-menu" id="tocMenu">
+        <div class="toc-title">Table of Contents</div>
+        <a href="#agreement" class="toc-link active"><i data-lucide="file-text"></i> 1. Acceptance of Terms</a>
+        <a href="#services" class="toc-link"><i data-lucide="car"></i> 2. Description of Services</a>
+        <a href="#eligibility" class="toc-link"><i data-lucide="user-check"></i> 3. User Eligibility & Accounts</a>
+        <a href="#payments" class="toc-link"><i data-lucide="credit-card"></i> 4. Payments, Fares & Refunds</a>
+        <a href="#conduct" class="toc-link"><i data-lucide="shield-alert"></i> 5. Safety & Prohibited Conduct</a>
+        <a href="#liability" class="toc-link"><i data-lucide="shield-off"></i> 6. Limitation of Liability</a>
+        <a href="#changes" class="toc-link"><i data-lucide="refresh-cw"></i> 7. Modifications to Terms</a>
+        <a href="#contact" class="toc-link"><i data-lucide="mail"></i> 8. Contact Information</a>
+      </nav>
+    </aside>
+
+    <!-- CONTENT AREA -->
+    <main class="content-area">
+      
+      <!-- HERO / BANNER -->
+      <section class="doc-header">
+        <span class="badge"><i data-lucide="shield-check"></i> Legal Agreement</span>
+        <h1>Terms of Service</h1>
+        <div class="meta-info">
+          <span><strong>Effective Date:</strong> September 29, 2026</span> • 
+          <span><strong>Version:</strong> 2.4</span>
+        </div>
+      </section>
+
+      <!-- NO RESULTS FOUND BANNER -->
+      <div id="noResults" class="no-results" style="display: none;">
+        <i data-lucide="search-x" style="width: 32px; height: 32px; margin-bottom: 8px;"></i>
+        <p>No matching sections found for your query.</p>
+      </div>
+
+      <!-- SECTIONS -->
+      <section id="agreement" class="terms-section">
+        <h2>1. Acceptance of Terms</h2>
+        <p>By downloading, accessing, or using the <strong>Zaride</strong> mobile application, website, or services (collectively, the "Platform"), you agree to be bound by these Terms of Service. If you do not agree to these terms, you must not access or use our services.</p>
+        <p>These terms constitute a legally binding agreement between you and Zaride Technologies Ltd. ("Zaride", "we", "us", or "our").</p>
+      </section>
+
+      <section id="services" class="terms-section">
+        <h2>2. Description of Services</h2>
+        <p>Zaride provides a technological platform connecting riders with third-party transportation providers, driver partners, and courier services. Zaride does not itself provide transportation services or function as a transportation carrier.</p>
+        
+        <div class="highlight-box">
+          <strong>Key Guarantee:</strong> Zaride works relentlessly to ensure that all transport options matched on our platform remain <strong>Fast, Affordable, Reliable, and Safe</strong> at all times.
+        </div>
+      </section>
+
+      <section id="eligibility" class="terms-section">
+        <h2>3. User Eligibility & Account Registration</h2>
+        <p>To use most aspects of the Zaride Platform, you must register for and maintain an active personal user account. You must be at least 18 years of age to obtain an account.</p>
+        <ul>
+          <li>You are responsible for all activity that occurs under your account.</li>
+          <li>You agree to maintain accurate, complete, and up-to-date information in your account.</li>
+          <li>You must keep your login credentials secure and confidential at all times.</li>
+        </ul>
+      </section>
+
+      <section id="payments" class="terms-section">
+        <h2>4. Payments, Fares & Refunds</h2>
+        <p>Use of the Platform results in charges for the services or goods you receive from third-party providers ("Charges"). Zaride will facilitate your payment of the applicable Charges on behalf of the driver partner.</p>
+        <p>Fares are calculated based on base rates, distance, duration, and applicable dynamic pricing during peak hours. All charges paid are final and non-refundable, unless otherwise determined by Zaride.</p>
+      </section>
+
+      <section id="conduct" class="terms-section">
+        <h2>5. Safety & Prohibited Conduct</h2>
+        <p>Safety is a core pillar of the Zaride experience. Users must interact with drivers, passengers, and support staff with respect and dignity at all times.</p>
+        <p>Prohibited activities include, but are not limited to:</p>
+        <ul>
+          <li>Carrying hazardous materials, illegal drugs, or unlicensed firearms.</li>
+          <li>Damaging or defacing the vehicle or equipment of third-party drivers.</li>
+          <li>Engaging in violent, aggressive, discriminatory, or harassing behavior.</li>
+          <li>Attempting to manipulate or exploit Zaride promo codes or referral systems.</li>
+        </ul>
+      </section>
+
+      <section id="liability" class="terms-section">
+        <h2>6. Limitation of Liability</h2>
+        <p>The services are provided "as is" and "as available." Zaride disclaims all representations and warranties, express, implied, or statutory, not expressly set out in these terms.</p>
+        <p>In no event shall Zaride be liable for indirect, incidental, special, exemplary, punitive, or consequential damages related to or resulting from any use of the Platform.</p>
+      </section>
+
+      <section id="changes" class="terms-section">
+        <h2>7. Modifications to Terms</h2>
+        <p>We reserve the right to modify these terms at any time. We will notify you of any material changes by updating the "Effective Date" at the top of this document or via email or in-app notifications. Continued use of Zaride after modifications implies acceptance of the updated terms.</p>
+      </section>
+
+      <section id="contact" class="terms-section">
+        <h2>8. Contact Information</h2>
+        <p>If you have any questions, concerns, or requests regarding these Terms of Service, please contact our Legal and Support Team at:</p>
+        <p><strong>Email:</strong> support@zaride.com<br>
+        <strong>Help Center:</strong> zaride.com/help</p>
+      </section>
+
+      <!-- CONSENT ACKNOWLEDGMENT CARD -->
+      <div class="consent-card">
+        <h3>Acknowledge & Continue</h3>
+        <p>Please confirm that you have read and accepted Zaride's Terms of Service to proceed with using our platform.</p>
+        
+        <div class="checkbox-wrapper">
+          <input type="checkbox" id="consentCheckbox" />
+          <label for="consentCheckbox">I have read and agree to the Zaride Terms of Service</label>
+        </div>
+
+        <button class="btn-primary" id="acceptBtn">
+          <a href="join.html">Accept & Continue</a>
+        </button>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join the Journey - Zaride</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="join-style.css" />
+</head>
+<body class="modal-overlay-bg">
+
+  <!-- STEP 0: MAIN SELECTION CARD / MODAL -->
+  <div class="join-card screen active" id="step-0">
+    <!-- Close Button -->
+    <a href="index.html" class="close-btn" id="closeModal">&times;</a>
+
+    <!-- Top Car Header Icon -->
+    <div class="top-icon-wrap">
+      <svg class="car-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-3h14v3z"/>
+        <circle cx="7.5" cy="15.5" r="1.5"/>
+        <circle cx="16.5" cy="15.5" r="1.5"/>
+      </svg>
+    </div>
+
+    <!-- Titles -->
+    <h1 class="join-title">Join the Journey</h1>
+    <p class="join-subtitle">Select how you would like to use the platform today</p>
+
+    <!-- Selection Options -->
+    <div class="options-container">
+      <!-- Passenger / Rider Option -->
+      <div class="role-card active" id="passengerOption" data-role="passenger">
+        <div class="role-icon-box passenger-blue">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+          </svg>
+        </div>
+        <div class="role-info">
+          <div class="role-header">
+            <span class="role-name">Passenger</span>
+            <span class="badge badge-rider">RIDER</span>
+          </div>
+          <p class="role-desc">Book rides instantly, track real-time drivers, and commute safely.</p>
+        </div>
+        <div class="radio-check">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        </div>
+      </div>
+
+      <!-- Driver / Partner Option -->
+      <div class="role-card" id="driverOption" data-role="driver">
+        <div class="role-icon-box driver-green">
+          <div class="inner-icon-shape"></div>
+        </div>
+        <div class="role-info">
+          <div class="role-header">
+            <span class="role-name">Driver</span>
+            <span class="badge badge-partner">PARTNER</span>
+          </div>
+          <p class="role-desc">Earn on your schedule, manage trips easily, and access instant payouts.</p>
+        </div>
+        <div class="radio-check">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Button -->
+    <button class="btn-continue" id="continueBtn">
+      Continue <span class="arrow">&rarr;</span>
+    </button>
+
+    <!-- Footer Note -->
+    <p class="account-footer">
+      Already have an account? <a href="signin.html">Log in here</a>
+    </p>
+  </div>
+
+  <!-- STEP 1: CREATE ACCOUNT MODAL -->
+  <div class="join-card screen" id="step-1">
+    <div class="header">
+      <span class="back-btn" onclick="goToStep(0)">&lsaquo; Back</span>
+    </div>
+    <h2 class="join-title">Create Your Account</h2>
+    <p class="join-subtitle">It only takes a minute.</p>
+
+    <form id="form-step-1" onsubmit="handleStep1(event)">
+      <label class="input-label">Phone Number</label>
+      <div class="phone-input-container">
+        <div class="country-code">
+          <span class="flag">🇳🇬</span>
+          <span>+234</span>
+        </div>
+        <input 
+          type="tel" 
+          id="phone-number" 
+          placeholder="812 345 6789" 
+          maxlength="11" 
+          required
+        />
+      </div>
+      <p class="error-msg" id="phone-error"></p>
+
+      <button type="submit" class="btn-continue">Send OTP</button>
+    </form>
+
+    <p class="terms-text">
+      By continuing, you agree to our <br />
+      <a href="terms.html">Terms of Service</a> and <a href="policy.html">Privacy Policy</a>
+    </p>
+
+    <p class="account-footer">
+      Already have an account? <a href="signin.html">Sign In</a>
+    </p>
+  </div>
+
+  <!-- STEP 2: VERIFY NUMBER (OTP) MODAL -->
+  <div class="join-card screen" id="step-2">
+    <div class="header">
+      <span class="back-btn" onclick="prevStep()">&lsaquo; Back</span>
+    </div>
+    <h2 class="join-title">Verify Your Number</h2>
+    <p class="join-subtitle">
+      We've sent a 6-digit code to <br />
+      <strong id="display-phone">+234 812 345 6789</strong>
+    </p>
+
+    <form id="form-step-2" onsubmit="handleStep2(event)">
+      <div class="otp-container">
+        <input type="text" class="otp-input" maxlength="1" required />
+        <input type="text" class="otp-input" maxlength="1" required />
+        <input type="text" class="otp-input" maxlength="1" required />
+        <input type="text" class="otp-input" maxlength="1" required />
+        <input type="text" class="otp-input" maxlength="1" required />
+        <input type="text" class="otp-input" maxlength="1" required />
+      </div>
+      <p class="error-msg" id="otp-error"></p>
+
+      <p class="resend-text">Resend code in <span id="timer">00:59</span></p>
+
+      <button type="submit" class="btn-continue">Verify & Continue</button>
+    </form>
+  </div>
+
+  <!-- STEP 3: COMPLETE PROFILE MODAL -->
+<div class="join-card screen" id="step-3">
+  <div class="header">
+    <span class="back-btn" onclick="prevStep()">&lsaquo; Back</span>
+  </div>
+  <h2 class="join-title">Complete Your Profile</h2>
+  <p class="join-subtitle">Add a few details to get started.</p>
+
+  <!-- AVATAR UPLOADER WITH HIDDEN FILE INPUT -->
+  <div class="avatar-upload">
+    <label for="avatar-input" class="avatar-label" title="Click to upload profile photo">
+      <div class="avatar-placeholder" id="avatar-preview">
+        <span class="avatar-icon" id="avatar-default-icon">👤</span>
+        <div class="camera-icon">📷</div>
+      </div>
+    </label>
+    <!-- Hidden File Input -->
+    <input 
+      type="file" 
+      id="avatar-input" 
+      accept="image/png, image/jpeg, image/jpg, image/webp" 
+      style="display: none;" 
+    />
+  </div>
+
+  <form id="form-step-3" onsubmit="handleStep3(event)">
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" id="first-name" placeholder="Sulaiman" required />
+      <p class="error-msg" id="fname-error"></p>
+    </div>
+
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" id="last-name" placeholder="Awal" required />
+      <p class="error-msg" id="lname-error"></p>
+    </div>
+
+    <div class="form-group">
+      <label>Email Address (optional)</label>
+      <input type="email" id="email" placeholder="sulaiman@example.com" />
+      <p class="error-msg" id="email-error"></p>
+    </div>
+
+    <a href="passenger/passenger-dashboard.html">
+  <button type="button" class="btn-continue">Continue</button>
+    </a>
+  </form>
+</div>
+
+  <script src="join-script.js"></script>
+</body>
+</html>

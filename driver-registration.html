@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Driver Registration - Zaride</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --bg-card: #1e293b;
+      --bg-input: #0f172a;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #10b981;
+      --accent-hover: #059669;
+      --accent-light: rgba(16, 185, 129, 0.15);
+      --shadow-color: rgba(0, 0, 0, 0.4);
+    }
+
+    body.light-mode {
+      --bg-dark: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-input: #f1f5f9;
+      --border-color: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --accent: #047857;
+      --accent-hover: #065f46;
+      --accent-light: #dcfce7;
+      --shadow-color: rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    .brand-logo span {
+      color: var(--accent);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-link {
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 8px 14px;
+      border-radius: 8px;
+    }
+
+    .nav-link:hover {
+      background-color: var(--border-color);
+    }
+
+    .theme-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* REGISTRATION CONTAINER */
+    .reg-container {
+      max-width: 720px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .reg-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: 0 10px 30px var(--shadow-color);
+    }
+
+    .reg-header {
+      margin-bottom: 28px;
+      text-align: center;
+    }
+
+    .reg-header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .reg-header p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* STEP PROGRESS BAR */
+    .step-progress {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .step-progress::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: var(--border-color);
+      z-index: 1;
+      transform: translateY(-50%);
+    }
+
+    .step-item {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--bg-card);
+      border: 2px solid var(--border-color);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .step-item.active {
+      border-color: var(--accent);
+      background-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .step-item.completed {
+      background-color: var(--accent-light);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* FORM STYLES */
+    .form-step {
+      display: none;
+    }
+
+    .form-step.active {
+      display: block;
+    }
+
+    .step-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    input, select {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--accent);
+    }
+
+    /* OTP STYLES */
+    .otp-info {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .otp-info p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .target-phone {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .otp-inputs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .otp-field {
+      width: 48px;
+      height: 56px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 800;
+      border-radius: 12px;
+    }
+
+    .resend-box {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .resend-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* FILE UPLOAD BOX */
+    .upload-box {
+      border: 2px dashed var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      background-color: var(--bg-input);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .upload-box:hover {
+      border-color: var(--accent);
+    }
+
+    .upload-box input[type="file"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .upload-box p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* CHECKBOX & CONSENT */
+    .consent-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .consent-group input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: var(--accent);
+    }
+
+    .consent-group label {
+      font-size: 13px;
+      line-height: 1.4;
+      color: var(--text-muted);
+    }
+
+    .consent-group label a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* BUTTONS */
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 28px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-group.full-width {
+        grid-column: span 1;
+      }
+      .reg-card {
+        padding: 24px 18px;
+      }
+      .otp-field {
+        width: 38px;
+        height: 48px;
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body class="dark-mode">
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a href="index.html" class="brand-logo">Zaride<span>.</span></a>
+    <div class="nav-actions">
+      <a href="index.html" class="nav-link"><i data-lucide="home"></i> Home</a>
+      <button class="theme-btn" id="themeToggle"><i data-lucide="sun"></i></button>
+    </div>
+  </header>
+
+  <!-- REGISTRATION CONTAINER -->
+  <main class="reg-container">
+    <div class="reg-card">
+      
+      <div class="reg-header">
+        <h1>Become a Zaride Driver</h1>
+        <p>Complete your registration to start earning</p>
+      </div>
+
+      <!-- PROGRESS TRACKER (5 STEPS NOW) -->
+      <div class="step-progress">
+        <div class="step-item active" id="step1-indicator">1</div>
+        <div class="step-item" id="step2-indicator">2</div>
+        <div class="step-item" id="step3-indicator">3</div>
+        <div class="step-item" id="step4-indicator">4</div>
+        <div class="step-item" id="step5-indicator">5</div>
+      </div>
+
+      <form id="driverRegForm" onsubmit="event.preventDefault();">
+        
+        <!-- STEP 1: PERSONAL INFORMATION -->
+        <div class="form-step active" id="step1">
+          <div class="step-title"><i data-lucide="user"></i> Personal Details</div>
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" required placeholder="John" />
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" required placeholder="Doe" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" required placeholder="john.doe@example.com" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" required placeholder="+234 800 000 0000" />
+            </div>
+            <div class="form-group full-width">
+              <label for="address">Residential Address</label>
+              <input type="text" id="address" required placeholder="123 Main Street, City, State" />
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: PHONE OTP VERIFICATION -->
+        <div class="form-step" id="step2">
+          <div class="step-title"><i data-lucide="smartphone"></i> Phone Verification</div>
+          
+          <div class="otp-info">
+            <p>We've sent a 6-digit verification code to:</p>
+            <p class="target-phone" id="displayPhone">+234 800 000 0000</p>
+          </div>
+
+          <div class="otp-inputs">
+            <input type="text" class="otp-field" maxlength="1" pattern="[0-9]" inputmode="numeric" />
+            <input type="text" class="otp-field" maxlength="1" pattern="[0-9]" inputmode="numeric" />
+            <input type="text" class="otp-field" maxlength="1" pattern="[0-9]" inputmode="numeric" />
+            <input type="text" class="otp-field" maxlength="1" pattern="[0-9]" inputmode="numeric" />
+            <input type="text" class="otp-field" maxlength="1" pattern="[0-9]" inputmode="numeric" />
+            <input type="text" class="otp-field" maxlength="1" pattern="[0-9]" inputmode="numeric" />
+          </div>
+
+          <div class="resend-box">
+            <span>Didn't receive the code? </span>
+            <span class="resend-link" id="resendBtn">Resend OTP</span>
+          </div>
+        </div>
+
+        <!-- STEP 3: DRIVER LICENSING & DOCUMENTS -->
+        <div class="form-step" id="step3">
+          <div class="step-title"><i data-lucide="shield-check"></i> License & Verification</div>
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="licenseNo">Driver's License Number</label>
+              <input type="text" id="licenseNo" required placeholder="DL-123456789" />
+            </div>
+            <div class="form-group">
+              <label for="licenseExpiry">License Expiry Date</label>
+              <input type="date" id="licenseExpiry" required />
+            </div>
+            
+            <div class="form-group full-width">
+              <label>Upload Driver's License (Front & Back)</label>
+              <div class="upload-box">
+                <i data-lucide="upload-cloud"></i>
+                <p>Click or drag files here to upload your license copy</p>
+                <input type="file" id="licenseFile" accept="image/*,.pdf" required />
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <label>Facial Identity Selfie</label>
+              <div class="upload-box">
+                <i data-lucide="camera"></i>
+                <p>Upload a clear front-facing headshot photo</p>
+                <input type="file" id="selfieFile" accept="image/*" required />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4: VEHICLE & PAYOUT DETAILS -->
+        <div class="form-step" id="step4">
+          <div class="step-title"><i data-lucide="car"></i> Vehicle & Financial Info</div>
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="carMake">Vehicle Make & Model</label>
+              <input type="text" id="carMake" required placeholder="Toyota Camry" />
+            </div>
+            <div class="form-group">
+              <label for="carYear">Model Year</label>
+              <input type="number" id="carYear" min="2010" max="2026" placeholder="2020" required />
+            </div>
+            <div class="form-group">
+              <label for="plateNo">License Plate Number</label>
+              <input type="text" id="plateNo" required placeholder="ABJ-123XY" />
+            </div>
+            <div class="form-group">
+              <label for="rideType">Vehicle Category</label>
+              <select id="rideType" required>
+                <option value="eco">Zaride Eco</option>
+                <option value="comfort">Zaride Comfort</option>
+                <option value="exec">Zaride Executive</option>
+              </select>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="bankName">Bank Name for Payouts</label>
+              <input type="text" id="bankName" required placeholder="e.g. Guarantee Trust Bank / Zenith Bank" />
+            </div>
+            <div class="form-group full-width">
+              <label for="accNo">Account Number</label>
+              <input type="text" id="accNo" required placeholder="10-digit account number" maxLength="10" />
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5: POLICY CONSENTS & FINAL SUBMISSION -->
+        <div class="form-step" id="step5">
+          <div class="step-title"><i data-lucide="file-text"></i> Legal Consents</div>
+          
+          <div class="consent-group">
+            <input type="checkbox" id="bgConsent" required />
+            <label for="bgConsent">I authorize Zaride to conduct background checks, driving record evaluations, and document verifications.</label>
+          </div>
+
+          <div class="consent-group">
+            <input type="checkbox" id="termsConsent" required />
+            <label for="termsConsent">I have read and agree to the <a href="terms.html" target="_blank">Zaride Terms of Service</a> and Driver Addendum.</label>
+          </div>
+
+          <div class="consent-group">
+            <input type="checkbox" id="privacyConsent" required />
+            <label for="privacyConsent">I accept the <a href="policy.html" target="_blank">Driver Privacy Policy</a> regarding real-time location processing and data usage.</label>
+          </div>
+        </div>
+
+        <!-- NAVIGATION BUTTONS -->
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary" id="prevBtn" style="display: none;">Back</button>
+          <button type="button" class="btn btn-primary" id="nextBtn">Next <i data-lucide="arrow-right"></i></button>
+        </div>
+
+      </form>
+
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+
+      let currentStep = 1;
+      const totalSteps = 5;
+
+      const nextBtn = document.getElementById('nextBtn');
+      const prevBtn = document.getElementById('prevBtn');
+      const themeToggle = document.getElementById('themeToggle');
+      const phoneInput = document.getElementById('phone');
+      const displayPhone = document.getElementById('displayPhone');
+      const otpFields = document.querySelectorAll('.otp-field');
+
+      // Theme Switcher Logic
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('light-mode');
+        const isLight = document.body.classList.contains('light-mode');
+        themeToggle.innerHTML = `<i data-lucide="${isLight ? 'moon' : 'sun'}"></i>`;
+        lucide.createIcons();
+      });
+
+      // OTP Auto-Focus Advancement
+      otpFields.forEach((field, index) => {
+        field.addEventListener('input', (e) => {
+          if (e.target.value.length === 1 && index < otpFields.length - 1) {
+            otpFields[index + 1].focus();
+          }
+        });
+
+        field.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && !e.target.value && index > 0) {
+            otpFields[index - 1].focus();
+          }
+        });
+      });
+
+      // Navigation Logic
+      nextBtn.addEventListener('click', () => {
+        if (currentStep === 1) {
+          // Sync phone number to OTP screen
+          displayPhone.textContent = phoneInput.value || '+234 800 000 0000';
+        }
+
+        if (currentStep < totalSteps) {
+          currentStep++;
+          updateStepView();
+        } else {
+          alert('Driver application submitted successfully! Your documents are pending review.');
+          window.location.href = 'passenger/drivers/driversdashboard.html';
+        }
+      });
+
+      prevBtn.addEventListener('click', () => {
+        if (currentStep > 1) {
+          currentStep--;
+          updateStepView();
+        }
+      });
+
+      function updateStepView() {
+        // Toggle Step Views
+        for (let i = 1; i <= totalSteps; i++) {
+          const stepEl = document.getElementById(`step${i}`);
+          const indicatorEl = document.getElementById(`step${i}-indicator`);
+          
+          if (i === currentStep) {
+            stepEl.classList.add('active');
+            indicatorEl.classList.add('active');
+            indicatorEl.classList.remove('completed');
+          } else {
+            stepEl.classList.remove('active');
+            indicatorEl.classList.remove('active');
+            if (i < currentStep) {
+              indicatorEl.classList.add('completed');
+            } else {
+              indicatorEl.classList.remove('completed');
+            }
+          }
+        }
+
+        // Toggle Buttons
+        prevBtn.style.display = currentStep === 1 ? 'none' : 'block';
+        if (currentStep === totalSteps) {
+          nextBtn.innerHTML = 'Submit Registration <i data-lucide="check-circle"></i>';
+        } else if (currentStep === 2) {
+          nextBtn.innerHTML = 'Verify OTP <i data-lucide="shield-check"></i>';
+        } else {
+          nextBtn.innerHTML = 'Next <i data-lucide="arrow-right"></i>';
+        }
+
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>

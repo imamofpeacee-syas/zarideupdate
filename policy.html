@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy - Zaride</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="policy-style.css">
+</head>
+<body class="dark-mode">
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a href="index.html" class="brand-logo">Zaride<span>.</span></a>
+    
+    <div class="nav-controls">
+      <a href="index.html" class="nav-link">
+        <i data-lucide="home"></i> Home
+      </a>
+      <button class="icon-btn" id="themeToggle" title="Toggle Theme">
+        <i data-lucide="sun" id="themeIcon"></i>
+      </button>
+      <button class="icon-btn" onclick="window.print()" title="Print Policy">
+        <i data-lucide="printer"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTAINER -->
+  <div class="container">
+    
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+      <div class="search-box">
+        <i data-lucide="search"></i>
+        <input type="text" id="searchInput" placeholder="Search privacy topics..." />
+      </div>
+
+      <nav class="toc-menu">
+        <div class="toc-title">Policy Sections</div>
+        <a href="#overview" class="toc-link active"><i data-lucide="info"></i> 1. Overview</a>
+        <a href="#data-collected" class="toc-link"><i data-lucide="database"></i> 2. Information We Collect</a>
+        <a href="#data-usage" class="toc-link"><i data-lucide="cpu"></i> 3. How We Use Your Data</a>
+        <a href="#data-sharing" class="toc-link"><i data-lucide="share-2"></i> 4. Data Sharing & Security</a>
+        <a href="#user-rights" class="toc-link"><i data-lucide="user-check"></i> 5. Your Rights & Choices</a>
+        <a href="#contact" class="toc-link"><i data-lucide="mail"></i> 6. Privacy Contact</a>
+      </nav>
+    </aside>
+
+    <!-- CONTENT AREA -->
+    <main class="content-area">
+      
+      <!-- HEADER -->
+      <section class="doc-header">
+        <span class="badge"><i data-lucide="lock"></i> Data Protection</span>
+        <h1>Privacy Policy</h1>
+        <div class="meta-info">
+          <span><strong>Effective Date:</strong> September 29, 2026</span> • 
+          <span><strong>Version:</strong> 1.2</span>
+        </div>
+      </section>
+
+      <!-- SECTIONS -->
+      <section id="overview" class="policy-section">
+        <h2>1. Overview</h2>
+        <p>At Zaride, your privacy and security are paramount. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information when you use our mobile application, website, and ride-hailing services.</p>
+        <p>By using Zaride, you consent to the data practices described in this policy.</p>
+      </section>
+
+      <section id="data-collected" class="policy-section">
+        <h2>2. Information We Collect</h2>
+        <p>We collect information to provide fast, reliable, and safe transportation services:</p>
+        <ul>
+          <li><strong>Account Data:</strong> Full name, phone number, email address, and profile picture.</li>
+          <li><strong>Location Data:</strong> Real-time precise location from your device when using trip features.</li>
+          <li><strong>Transaction Details:</strong> Ride history, payment receipts, and payment method details (processed securely via encrypted gateways).</li>
+        </ul>
+      </section>
+
+      <section id="data-usage" class="policy-section">
+        <h2>3. How We Use Your Data</h2>
+        <p>Your information is utilized strictly to deliver and improve our services:</p>
+        <div class="highlight-box">
+          <strong>Core Operations:</strong> Matching you with nearby driver partners, calculating upfront fares, and providing live GPS trip navigation.
+        </div>
+        <ul>
+          <li>To verify identity and prevent fraudulent account activity.</li>
+          <li>To process seamless in-app payments and deliver trip receipts.</li>
+          <li>To offer 24/7 customer support and emergency response features.</li>
+        </ul>
+      </section>
+
+      <section id="data-sharing" class="policy-section">
+        <h2>4. Data Sharing & Security</h2>
+        <p>We do not sell your personal data. We only share minimal necessary information in the following situations:</p>
+        <ul>
+          <li><strong>With Drivers:</strong> Pickup and dropoff locations, first name, and phone mask (for call/chat coordination).</li>
+          <li><strong>For Legal Requirements:</strong> When required by court orders or authorized government requests.</li>
+        </ul>
+      </section>
+
+      <section id="user-rights" class="policy-section">
+        <h2>5. Your Rights & Choices</h2>
+        <p>You maintain full control over your personal information:</p>
+        <ul>
+          <li><strong>Access & Edit:</strong> Update your profile anytime from the app settings.</li>
+          <li><strong>Data Deletion:</strong> Request account closure and permanent removal of personal records.</li>
+          <li><strong>Location Permissions:</strong> Toggle device location permissions in system settings at any time.</li>
+        </ul>
+      </section>
+
+      <section id="contact" class="policy-section">
+        <h2>6. Privacy Contact</h2>
+        <p>For questions or requests regarding your data, please reach out to our Data Protection Officer:</p>
+        <p><strong>Email:</strong> privacy@zaride.com<br>
+        <strong>Address:</strong> Zaride Technologies HQ, Abuja, Nigeria</p>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="policy-script.js"></script>
+</body>
+</html>

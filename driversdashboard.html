@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Zaride Driver - Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard-style.css" />
+</head>
+<body>
+
+  <!-- DESKTOP SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo">Z</div>
+      <div>
+        <div class="brand-title">Zaride</div>
+        <span class="brand-badge">DRIVER HUB</span>
+      </div>
+    </div>
+
+    <!-- ONLINE / OFFLINE TOGGLE WIDGET -->
+    <div class="status-toggle-card">
+      <div class="toggle-info">
+        <span class="status-indicator" id="sidebar-status-dot"></span>
+        <span class="status-text" id="sidebar-status-text">OFFLINE</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="driver-status-toggle" onchange="toggleOnlineStatus(this.checked)">
+        <span class="slider round"></span>
+      </label>
+    </div>
+
+    <!-- DAILY METRICS CARD -->
+    <div class="quick-stats-card">
+      <div class="qs-item">
+        <span class="qs-label">Today's Earnings</span>
+        <span class="qs-value highlight" id="today-earnings">₦12,500</span>
+      </div>
+      <div class="qs-divider"></div>
+      <div class="qs-row">
+        <div>
+          <span class="qs-sublabel">Trips</span>
+          <span class="qs-subval" id="today-trips">8</span>
+        </div>
+        <div>
+          <span class="qs-sublabel">Rating</span>
+          <span class="qs-subval" id="driver-rating">★ 4.9</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAVIGATION MENU -->
+    <nav class="nav-menu">
+      <button class="nav-item active" id="nav-dashboard" onclick="switchTab('dashboard')">
+        <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+        <span>Dashboard</span>
+      </button>
+      <button class="nav-item" id="nav-earnings" onclick="switchTab('earnings')">
+        <svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+        <span>Earnings & Wallet</span>
+      </button>
+      <button class="nav-item" id="nav-history" onclick="switchTab('history')">
+        <svg viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+
+        <span>Trip History</span>
+      </button>
+      <button class="nav-item" id="nav-performance" onclick="switchTab('performance')">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+
+        <span>Performance</span>
+      </button>
+      <button class="nav-item" id="nav-vehicle" onclick="switchTab('vehicle')">
+        <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+
+        <span>Vehicle & Docs</span>
+      </button>
+    </nav>
+
+    <!-- DRIVER PROFILE FOOTER -->
+    <div class="user-widget">
+      <div class="user-avatar">SO</div>
+      <div class="user-info">
+        <div class="user-name">Sulaiman O.</div>
+        <div class="user-role">Bajaj Keke • KD-248-ZAR</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CANVAS & DRIVER INTERFACE MAP -->
+  <main class="main-wrapper">
+    <div class="map-container">
+      <canvas id="map-canvas"></canvas>
+    </div>
+
+    <!-- MAP OVERLAY BUTTONS -->
+    <div class="map-controls">
+      <button class="map-btn glass-btn" onclick="toggleSurgeHeatmap()">🔥 Heatmap</button>
+      <button class="map-btn glass-btn" onclick="recenterMap()">🎯 Recenter</button>
+    </div>
+
+    <!-- DRIVER FLOATING PANELS -->
+    <div class="panel-container">
+
+      <!-- 1. OFFLINE / STANDBY PANEL -->
+      <div class="card-panel glass-panel active" id="panel-offline">
+        <div class="panel-header">
+          <h3>You are Currently Offline</h3>
+          <p>Go online to start receiving ride requests around campus.</p>
+        </div>
+        <div class="panel-body text-center">
+          <div class="offline-hero-icon">🛺</div>
+          <button class="btn-primary" onclick="triggerOnlineFromPanel()">GO ONLINE NOW</button>
+        </div>
+      </div>
+
+      <!-- 2. ONLINE / SEARCHING FOR RIDES PANEL -->
+      <div class="card-panel glass-panel" id="panel-online-idle">
+        <div class="panel-header">
+          <div class="badge-status-online">● ONLINE & READY</div>
+          <h3>Looking for Requests...</h3>
+          <p>High demand detected around Main Campus Gate.</p>
+        </div>
+        <div class="panel-body text-center">
+          <div class="pulse-radar">
+            <div class="p-wave"></div>
+            <div class="p-wave"></div>
+            <div class="p-wave"></div>
+            <span class="p-icon">📍</span>
+          </div>
+          <p class="sub-text">Stay near busy hubs for faster matching.</p>
+        </div>
+      </div>
+
+      <!-- 3. ACTIVE TRIP STAGE 1: NAVIGATING TO PICKUP -->
+      <div class="card-panel glass-panel" id="panel-enroute-pickup">
+        <div class="panel-header">
+          <span class="status-pill green">STAGE 1: EN-ROUTE TO PICKUP</span>
+          <h3 id="rider-name-pickup">Passenger: Zainab A.</h3>
+          <p id="pickup-eta-text">3 mins away • 600m</p>
+        </div>
+        <div class="panel-body">
+          <div class="location-box">
+            <div class="loc-row">
+              <span class="dot green"></span>
+              <div>
+                <span class="loc-title">Pickup Location</span>
+                <p class="loc-desc" id="p-pickup-address">Main Campus ABU (North Gate)</p>
+              </div>
+            </div>
+          </div>
+          <div class="action-grid">
+            <button class="btn-secondary glass-btn" onclick="callRider()">📞 Call</button>
+            <button class="btn-secondary glass-btn" onclick="chatRider()">💬 Chat</button>
+          </div>
+          <button class="btn-primary" onclick="arriveAtPickup()">I HAVE ARRIVED</button>
+          <button class="btn-text-danger" onclick="openCancelModal()">Cancel Ride</button>
+        </div>
+      </div>
+
+      <!-- 4. ACTIVE TRIP STAGE 2: WAITING & START TRIP -->
+      <div class="card-panel glass-panel" id="panel-waiting-rider">
+        <div class="panel-header">
+          <span class="status-pill yellow">STAGE 2: WAITING FOR PASSENGER</span>
+          <h3>Passenger Notified</h3>
+          <p>Waiting Timer: <strong id="wait-timer" class="text-accent">01:45</strong></p>
+        </div>
+        <div class="panel-body">
+          <div class="location-box">
+            <div class="loc-row">
+              <span class="dot red"></span>
+              <div>
+                <span class="loc-title">Destination</span>
+                <p class="loc-desc" id="p-drop-address">Congo Campus (Ahmadu Bello Way)</p>
+              </div>
+            </div>
+          </div>
+          <div class="fare-tag">Est. Fare: <strong id="p-est-fare">₦400</strong> (Cash)</div>
+          <button class="btn-primary success" onclick="startRideTransit()">SLIDE TO START TRIP</button>
+        </div>
+      </div>
+
+      <!-- 5. ACTIVE TRIP STAGE 3: IN TRANSIT -->
+      <div class="card-panel glass-panel" id="panel-in-transit">
+        <div class="panel-header">
+          <span class="status-pill green">STAGE 3: IN TRANSIT TO DESTINATION</span>
+          <h3>On The Way...</h3>
+          <p>Speed: <strong id="current-speed">24 km/h</strong> (Limit: 30 km/h)</p>
+        </div>
+        <div class="panel-body">
+          <div class="progress-bar">
+            <div class="progress-fill" id="trip-progress-fill"></div>
+          </div>
+          <div class="stats-row">
+            <div class="stat-box">
+              <span class="lbl">Dist Left</span>
+              <span class="val" id="transit-dist">1.8 km</span>
+            </div>
+            <div class="stat-box">
+              <span class="lbl">ETA</span>
+              <span class="val" id="transit-eta">5 mins</span>
+            </div>
+            <div class="stat-box">
+              <span class="lbl">Fare</span>
+              <span class="val text-accent" id="transit-fare">₦400</span>
+            </div>
+          </div>
+          <button class="btn-primary success" onclick="completeTripAndCollect()">COMPLETE TRIP</button>
+          <button class="btn-danger-sos" onclick="triggerSOS()">🚨 SOS EMERGENCY</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- POPUP 1: INCOMING RIDE REQUEST OVERLAY -->
+  <div class="modal-overlay glass-modal-overlay" id="modal-request">
+    <div class="request-card glass-modal">
+      <div class="timer-bar"><div class="timer-fill" id="request-timer-fill"></div></div>
+      <div class="req-header">
+        <span class="badge-req">NEW RIDE REQUEST</span>
+        <h2 class="req-fare" id="req-fare-val">₦400</h2>
+        <span class="req-pay-type" id="req-pay-method">Cash Payment</span>
+      </div>
+
+      <div class="req-rider-info">
+        <div class="r-avatar">ZA</div>
+        <div>
+          <div class="r-name" id="req-rider-name">Zainab A.</div>
+          <div class="r-rating">★ 4.9 (24 Trips)</div>
+        </div>
+      </div>
+
+      <div class="req-route-box">
+        <div class="r-point"><span class="dot green"></span> <span id="req-pickup">Main Campus ABU Gate</span></div>
+        <div class="r-line"></div>
+        <div class="r-point"><span class="dot red"></span> <span id="req-drop">Congo Campus</span></div>
+      </div>
+
+      <div class="req-meta-row">
+        <span>Est. Dist: <strong>2.4 km</strong></span>
+        <span>Pickup: <strong>3 mins away</strong></span>
+      </div>
+
+      <div class="req-actions">
+        <button class="btn-decline glass-btn" onclick="declineRequest()">Decline</button>
+        <button class="btn-accept" onclick="acceptRequest()">ACCEPT RIDE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- POPUP 2: FARE SUMMARY & RATING PASSENGER -->
+  <div class="modal-overlay glass-modal-overlay" id="modal-fare-summary">
+    <div class="modal-box glass-modal text-center">
+      <div class="party-emoji">🏁</div>
+      <h3>Trip Completed!</h3>
+      <p>Collect payment from passenger</p>
+
+      <div class="collect-fare-card">
+        <span class="collect-lbl">COLLECT CASH</span>
+        <h1 class="collect-val" id="collect-amount">₦400</h1>
+        <span class="collect-sub" id="collect-method-sub">Cash Trip • Base + Distance</span>
+      </div>
+
+      <div class="rate-section">
+        <p>Rate Passenger:</p>
+        <div class="star-row">
+          <span class="star active" onclick="setPassengerRating(1)">★</span>
+          <span class="star active" onclick="setPassengerRating(2)">★</span>
+          <span class="star active" onclick="setPassengerRating(3)">★</span>
+          <span class="star active" onclick="setPassengerRating(4)">★</span>
+          <span class="star active" onclick="setPassengerRating(5)">★</span>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="finishFareCollection()">CONFIRM & COMPLETE</button>
+    </div>
+  </div>
+
+  <!-- POPUP 3: CANCEL TRIP REASON MODAL -->
+  <div class="modal-overlay glass-modal-overlay" id="modal-cancel">
+    <div class="modal-box glass-modal">
+      <h3>Cancel Trip</h3>
+      <p>Select a reason for canceling:</p>
+      <div class="radio-list">
+        <label class="radio-item"><input type="radio" name="cancel" checked /> Rider didn't show up</label>
+        <label class="radio-item"><input type="radio" name="cancel" /> Unreachable / Phone off</label>
+        <label class="radio-item"><input type="radio" name="cancel" /> Vehicle mechanical issue</label>
+      </div>
+      <div class="modal-btns">
+        <button class="btn-secondary glass-btn" onclick="closeCancelModal()">Go Back</button>
+        <button class="btn-danger" onclick="confirmCancelRide()">Cancel Ride</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE-OVER MODALS (EARNINGS, HISTORY, PERFORMANCE, VEHICLE) -->
+
+  <!-- EARNINGS & WALLET MODAL -->
+  <div class="slide-modal glass-slide" id="modal-earnings">
+    <div class="slide-header">
+      <h3>Earnings & Wallet</h3>
+      <button class="close-btn" onclick="closeModals()">✕</button>
+    </div>
+    <div class="wallet-balance-card">
+      <span class="wb-label">Available Balance</span>
+      <h2 class="wb-val">₦28,450.00</h2>
+      <button class="btn-primary success" onclick="alert('Payout requested! Funds transferred to your linked bank account.')">Payout to Bank Account</button>
+    </div>
+
+    <h4 class="section-title">Weekly Performance</h4>
+    <div class="earnings-chart-placeholder">
+      <div class="bar-col"><div class="bar-fill" style="height: 60%"></div><span>Mon</span></div>
+      <div class="bar-col"><div class="bar-fill" style="height: 80%"></div><span>Tue</span></div>
+      <div class="bar-col"><div class="bar-fill" style="height: 45%"></div><span>Wed</span></div>
+      <div class="bar-col"><div class="bar-fill" style="height: 95%"></div><span>Thu</span></div>
+      <div class="bar-col"><div class="bar-fill" style="height: 70%"></div><span>Fri</span></div>
+      <div class="bar-col"><div class="bar-fill" style="height: 30%"></div><span>Sat</span></div>
+      <div class="bar-col"><div class="bar-fill" style="height: 10%"></div><span>Sun</span></div>
+    </div>
+  </div>
+
+  <!-- TRIP HISTORY MODAL -->
+  <div class="slide-modal glass-slide" id="modal-history">
+    <div class="slide-header">
+      <h3>Trip History</h3>
+      <button class="close-btn" onclick="closeModals()">✕</button>
+    </div>
+    <div class="history-list">
+      <div class="h-item glass-card">
+        <div>
+          <h5>Main Campus ➔ Congo Campus</h5>
+          <p>Today, 09:42 AM • Zainab A.</p>
+        </div>
+        <span class="h-price">+₦400</span>
+      </div>
+      <div class="h-item glass-card">
+        <div>
+          <h5>North Gate ➔ Kwangila</h5>
+          <p>Today, 08:15 AM • Ibrahim M.</p>
+        </div>
+        <span class="h-price">+₦700</span>
+      </div>
+      <div class="h-item glass-card">
+        <div>
+          <h5>Sulaiman Hostel ➔ Assembly Hall</h5>
+          <p>Yesterday, 04:20 PM • Maryam K.</p>
+        </div>
+        <span class="h-price">+₦200</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERFORMANCE MODAL -->
+  <div class="slide-modal glass-slide" id="modal-performance">
+    <div class="slide-header">
+      <h3>Performance Metrics</h3>
+      <button class="close-btn" onclick="closeModals()">✕</button>
+    </div>
+    <div class="perf-grid">
+      <div class="perf-card glass-card">
+        <span class="p-title">Acceptance Rate</span>
+        <span class="p-val text-accent">96%</span>
+      </div>
+      <div class="perf-card glass-card">
+        <span class="p-title">Cancellation Rate</span>
+        <span class="p-val text-green">2%</span>
+      </div>
+      <div class="perf-card glass-card">
+        <span class="p-title">Total Trips</span>
+        <span class="p-val">342</span>
+      </div>
+      <div class="perf-card glass-card">
+        <span class="p-title">Overall Rating</span>
+        <span class="p-val text-yellow">★ 4.9</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- VEHICLE & DOCS MODAL -->
+  <div class="slide-modal glass-slide" id="modal-vehicle">
+    <div class="slide-header">
+      <h3>Vehicle & Documents</h3>
+      <button class="close-btn" onclick="closeModals()">✕</button>
+    </div>
+    <div class="v-details-box glass-card">
+      <h4>Registered Vehicle</h4>
+      <p>Bajaj RE Auto-Rickshaw (Keke)</p>
+      <span class="plate-tag">KD-248-ZAR</span>
+    </div>
+    <h4 class="section-title">Compliance Documents</h4>
+    <div class="doc-row glass-card">
+      <span>Drivers License</span>
+      <span class="status-tag verified">VERIFIED ✓</span>
+    </div>
+    <div class="doc-row glass-card">
+      <span>Vehicle Inspection</span>
+      <span class="status-tag verified">VERIFIED ✓</span>
+    </div>
+    <div class="doc-row glass-card">
+      <span>Campus Permit</span>
+      <span class="status-tag verified">ACTIVE ✓</span>
+    </div>
+  </div>
+
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <button class="m-nav-item active" id="m-nav-dashboard" onclick="switchTab('dashboard')">
+      <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+      <span>Drive</span>
+    </button>
+    <button class="m-nav-item" id="m-nav-earnings" onclick="switchTab('earnings')">
+      <svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+      <span>Wallet</span>
+    </button>
+    <button class="m-nav-item" id="m-nav-history" onclick="switchTab('history')">
+      <svg viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+      <span>Trips</span>
+    </button>
+    <button class="m-nav-item" id="m-nav-vehicle" onclick="switchTab('vehicle')">
+      <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+      <span>Vehicle</span>
+    </button>
+  </nav>
+
+  <script src="dashboard-script.js"></script>
+</body>
+</html>
